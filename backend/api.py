@@ -32,16 +32,27 @@ from app.services import ontology_service
 from app.db.mongodb import test_connection
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Lifespan context manager for startup and shutdown events."""
-    # Startup
-    script_dir = os.path.dirname(os.path.abspath(__file__))
+import threading
+
+def load_ontology_background(script_dir: str):
+    """Load the ontology in a background thread so we don't block Uvicorn port binding."""
     try:
         ontology_service.load_ontology(script_dir)
         print("✓ Ontology loaded successfully")
     except Exception as e:
         print(f"✗ Failed to load ontology: {e}")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup and shutdown events."""
+    # Startup
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Run in background to instantly bind to port 8080 for Fly.io TCP checks
+    print("Starting background ontology loading...")
+    t = threading.Thread(target=load_ontology_background, args=(script_dir,))
+    t.daemon = True
+    t.start()
     
     if await test_connection():
         print("✓ MongoDB connected successfully")
