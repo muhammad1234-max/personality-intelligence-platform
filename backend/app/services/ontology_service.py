@@ -67,6 +67,9 @@ class OntologyService:
     
     def get_trait_map(self) -> Dict:
         """Map trait instances to trait names."""
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return {}
         return {
@@ -97,6 +100,9 @@ class OntologyService:
         Returns:
             Tuple of (questions list, likert options list)
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return [], []
         
@@ -174,6 +180,9 @@ class OntologyService:
         Returns:
             Dict with structure: {trait: {'positive': [ids], 'negative': [ids]}}
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return {}
         
@@ -223,6 +232,9 @@ class OntologyService:
         Returns:
             Dict with structure: {trait: {'mean': float, 'std': float}}
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return {}
         
@@ -251,6 +263,9 @@ class OntologyService:
         Returns:
             List of category dicts with name, min, max percentiles
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return []
         
@@ -272,6 +287,9 @@ class OntologyService:
         Returns:
             Dict with structure: {outcome: {trait: {'value': float, 'num_studies': int}}}
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return {}
         
@@ -309,6 +327,9 @@ class OntologyService:
         Returns:
             List of trait info dicts with key, name, color, label
         """
+        if not self.is_loaded:
+            self.load_ontology()
+            
         if not self.ns:
             return []
         
