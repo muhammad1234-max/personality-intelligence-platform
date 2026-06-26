@@ -11,10 +11,11 @@ Personality Traits Ontology Assessment is an intelligent, ontology-driven psycho
 - **Responsive Design**: Fluid, mobile-first interface built for phones, tablets, and desktop displays.
 
 ## Screenshots
-> *(Placeholders for Screenshots)*
-> ![Hero Section](frontend/public/hero-brain.png)
-> ![Radar Chart](frontend/public/hero-radar.png)
-> ![AI Guidance](frontend/public/hero-neural.png)
+![Landing Page](assets/screenshots/landing-page.png)
+![Participant Details](assets/screenshots/participant-details.png)
+![Assessment Question](assets/screenshots/assessment-question.png)
+![Profile Results](assets/screenshots/profile-results.png)
+![Predicted Outcomes](assets/screenshots/predicted-outcomes.png)
 
 ## Technology Stack
 - **Frontend**: React (Vite), Tailwind CSS, Framer Motion, Recharts
