@@ -1,0 +1,745 @@
+@prefix :  <http://www.personality-ontology.org/bigfive#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.personality-ontology.org/bigfive> .
+
+# ===============================================
+# ONTOLOGY DECLARATION
+# ===============================================
+
+<http://www.personality-ontology.org/bigfive> rdf:type owl:Ontology ;
+    rdfs:label "Big Five Personality Traits Ontology" ;
+    rdfs:comment "An ontology for the Big Five personality model based on IPIP-50 scale and meta-analytic research." ;
+    owl:versionInfo "1.0.0" .
+
+# ===============================================
+# CLASSES
+# ===============================================
+
+# Main Personality Trait Classes
+ :PersonalityTrait rdf:type owl:Class ;
+    rdfs:label "Personality Trait" ;
+    rdfs:comment "A broad dimension of personality in the Big Five model" . 
+
+ :Extraversion rdf:type owl:Class ;
+    rdfs:subClassOf :PersonalityTrait ;
+    rdfs:label "Extraversion" ;
+    rdfs:comment "Tendency toward sociability, assertiveness, and positive emotions" .
+
+:Agreeableness rdf:type owl:Class ;
+    rdfs:subClassOf :PersonalityTrait ;
+    rdfs:label "Agreeableness" ;
+    rdfs:comment "Tendency toward cooperation, trust, and empathy" .
+
+:Conscientiousness rdf:type owl:Class ;
+    rdfs:subClassOf :PersonalityTrait ;
+    rdfs:label "Conscientiousness" ;
+    rdfs:comment "Tendency toward organization, dependability, and self-discipline" .
+
+:Neuroticism rdf:type owl:Class ;
+    rdfs:subClassOf :PersonalityTrait ;
+    rdfs:label "Neuroticism" ;
+    rdfs:comment "Tendency toward negative emotions and emotional instability" .
+
+ :Openness rdf:type owl:Class ;
+    rdfs:subClassOf :PersonalityTrait ;
+    rdfs:label "Openness to Experience" ;
+    rdfs:comment "Tendency toward creativity, curiosity, and openness to new ideas" .
+
+# Question Classes
+:Question rdf:type owl:Class ;
+    rdfs:label "Question" ;
+    rdfs:comment "A question item from the IPIP-50 personality assessment" .
+
+ :PositivelyKeyedQuestion rdf:type owl:Class ;
+    rdfs:subClassOf :Question ;
+    rdfs:label "Positively Keyed Question" ;
+    rdfs:comment "Higher response indicates higher trait level" .
+
+:NegativelyKeyedQuestion rdf:type owl:Class ;
+    rdfs:subClassOf :Question ;
+    rdfs:label "Negatively Keyed Question" ;
+    rdfs:comment "Higher response indicates lower trait level (reverse scored)" .
+
+# Response and Assessment Classes
+:Response rdf:type owl:Class ;
+    rdfs:label "Response" . 
+
+:LikertOption rdf:type owl:Class ;
+    rdfs:label "Likert Option" . 
+
+:Assessment rdf:type owl:Class ;
+    rdfs:label "Assessment" ;
+    rdfs:comment "A personality assessment instrument" . 
+
+# Person Class
+:Person rdf:type owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "An individual who takes a personality assessment" .
+
+# Score Classes
+:TraitScore rdf:type owl:Class ;
+    rdfs:label "Trait Score" .
+
+ :ScoreCategory rdf:type owl:Class ;
+    rdfs:label "Score Category" .
+
+# Performance Outcome Classes
+:PerformanceOutcome rdf:type owl:Class ;
+    rdfs:label "Performance Outcome" .
+
+:JobPerformance rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceOutcome ;
+    rdfs:label "Job Performance" .
+
+:AcademicPerformance rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceOutcome ;
+    rdfs:label "Academic Performance" . 
+
+:LeadershipEffectiveness rdf:type owl:Class ;
+    rdfs:subClassOf :PerformanceOutcome ;
+    rdfs:label "Leadership Effectiveness" .
+
+
+# Correlation Finding Class
+:CorrelationFinding rdf:type owl:Class ;
+    rdfs:label "Correlation Finding" ;
+    rdfs:comment "A statistical finding representing the correlation between a personality trait and a performance outcome, aggregated from research studies" .
+
+:PopulationNorm rdf:type owl:Class ;
+    rdfs:label "Population Norm" .
+
+# ===============================================
+# OBJECT PROPERTIES
+# ===============================================
+
+ :measuresTrait rdf:type owl:ObjectProperty ;
+    rdfs:domain :Question ;
+    rdfs:range :PersonalityTrait ;
+    rdfs:label "measures trait" .
+
+:belongsToPerson rdf:type owl:ObjectProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range :Person ;
+    rdfs:label "belongs to person" . 
+
+:forTrait rdf:type owl:ObjectProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range :PersonalityTrait ;
+    rdfs:label "for trait" .
+
+:hasTraitScore rdf:type owl:ObjectProperty ;
+    rdfs:domain :Person ;
+    rdfs:range :TraitScore ;
+    rdfs:label "has trait score" .
+
+:predictsOutcome rdf:type owl:ObjectProperty ;
+    rdfs:domain :PersonalityTrait ;
+    rdfs:range :PerformanceOutcome ;
+    rdfs:label "predicts outcome" . 
+
+:hasScoreCategory rdf:type owl:ObjectProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range :ScoreCategory ;
+    rdfs:label "has score category" .
+
+:hasNorm rdf:type owl:ObjectProperty ;
+    rdfs:domain :PersonalityTrait ;
+    rdfs:range :PopulationNorm ;
+    rdfs:label "has norm" .
+
+:forOutcome rdf:type owl:ObjectProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range :PerformanceOutcome ;
+    rdfs:label "for outcome" .
+
+ :regardingTrait rdf:type owl:ObjectProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range :PersonalityTrait ;
+    rdfs:label "regarding trait" . 
+
+# ===============================================
+# DATA PROPERTIES
+# ===============================================
+
+:questionID rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Question ;
+    rdfs:range xsd:integer ;
+    rdfs:label "question ID" .
+
+:questionText rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Question ;
+    rdfs:range xsd:string ;
+    rdfs:label "question text" . 
+
+:rawScore rdf:type owl:DatatypeProperty ;
+    rdfs:domain :Response ;
+    rdfs:range xsd:integer ;
+    rdfs:label "raw score" .
+
+:traitRawScore rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range xsd:integer ;
+    rdfs:label "trait raw score" .
+
+:traitPercentile rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range xsd:float ;
+    rdfs:label "trait percentile" .
+
+:traitTScore rdf:type owl:DatatypeProperty ;
+    rdfs:domain :TraitScore ;
+    rdfs:range xsd:float ;
+    rdfs:label "trait T-score" .
+
+ :populationMean rdf:type owl:DatatypeProperty ;
+    rdfs:domain :PopulationNorm ;
+    rdfs:range xsd:float ;
+    rdfs:label "population mean" .
+
+:populationStd rdf:type owl:DatatypeProperty ;
+    rdfs:domain :PopulationNorm ;
+    rdfs:range xsd:float ;
+    rdfs:label "population standard deviation" . 
+
+:sampleSize rdf:type owl:DatatypeProperty ;
+    rdfs:domain :PopulationNorm ;
+    rdfs:range xsd:integer ;
+    rdfs:label "sample size" .
+
+:correlationValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range xsd:float ;
+    rdfs:label "correlation value" .
+
+:confidenceIntervalLower rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range xsd:float ;
+    rdfs:label "CI lower bound" .
+
+:confidenceIntervalUpper rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range xsd:float ;
+    rdfs:label "CI upper bound" .
+
+:numberOfStudies rdf:type owl:DatatypeProperty ;
+    rdfs:domain :CorrelationFinding ;
+    rdfs:range xsd:integer ;
+    rdfs:label "number of studies" .
+
+:likertValue rdf:type owl:DatatypeProperty ;
+    rdfs:domain :LikertOption ;
+    rdfs:range xsd:integer ;
+    rdfs:label "likert value" .
+
+:likertLabel rdf:type owl:DatatypeProperty ;
+    rdfs:domain :LikertOption ;
+    rdfs:range xsd:string ;
+    rdfs:label "likert label" .
+
+ :categoryName rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ScoreCategory ;
+    rdfs:range xsd:string ;
+    rdfs:label "category name" .
+
+:categoryMinPercentile rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ScoreCategory ;
+    rdfs:range xsd:float ;
+    rdfs:label "min percentile" .
+
+:categoryMaxPercentile rdf:type owl:DatatypeProperty ;
+    rdfs:domain :ScoreCategory ;
+    rdfs:range xsd:float ;
+    rdfs:label "max percentile" . 
+
+# ===============================================
+# INDIVIDUALS - LIKERT OPTIONS
+# ===============================================
+
+ :Likert1 rdf:type :LikertOption ;
+ :likertValue 1 ;
+    :likertLabel "Very Inaccurate" .
+
+ :Likert2 rdf:type :LikertOption ;
+    :likertValue 2 ;
+    :likertLabel "Moderately Inaccurate" . 
+
+:Likert3 rdf:type :LikertOption ;
+    :likertValue 3 ;
+    :likertLabel "Neither Accurate Nor Inaccurate" . 
+
+:Likert4 rdf:type :LikertOption ;
+    :likertValue 4 ;
+    :likertLabel "Moderately Accurate" .
+
+:Likert5 rdf:type :LikertOption ;
+    :likertValue 5 ;
+    :likertLabel "Very Accurate" . 
+
+# ===============================================
+# INDIVIDUALS - SCORE CATEGORIES
+# ===============================================
+
+:VeryLow rdf:type :ScoreCategory ;
+    :categoryName "Very Low" ;
+    :categoryMinPercentile 0.0 ;
+    :categoryMaxPercentile 20.0 .
+
+:Low rdf:type :ScoreCategory ;
+    :categoryName "Low" ;
+    :categoryMinPercentile 20.0 ;
+    :categoryMaxPercentile 40.0 .
+
+ :Average rdf:type :ScoreCategory ;
+    :categoryName "Average" ;
+    :categoryMinPercentile 40.0 ;
+    :categoryMaxPercentile 60.0 .
+
+ :High rdf:type :ScoreCategory ;
+    :categoryName "High" ;
+    :categoryMinPercentile 60.0 ;
+    :categoryMaxPercentile 80.0 . 
+
+:VeryHigh rdf:type :ScoreCategory ;
+    :categoryName "Very High" ;
+    :categoryMinPercentile 80.0 ;
+    :categoryMaxPercentile 100.0 .
+
+# ===============================================
+# INDIVIDUALS - TRAIT INSTANCES WITH NORMS
+# ===============================================
+
+ :ExtraversionTrait rdf:type :Extraversion ;
+    rdfs:label "Extraversion" ;
+ :hasNorm :ExtraversionNorm ;
+    :predictsOutcome :JobPerformanceOutcome ;
+    :predictsOutcome :LeadershipEffectivenessOutcome .
+
+ :ExtraversionNorm rdf:type :PopulationNorm ;
+    :populationMean 29.6 ;
+    :populationStd 6.2 ;
+    :sampleSize 23994 .
+
+:AgreeablenessTrait rdf:type :Agreeableness ;
+    rdfs:label "Agreeableness" ;
+    :hasNorm :AgreeablenessNorm .
+
+:AgreeablenessNorm rdf:type :PopulationNorm ;
+    :populationMean 36.0 ;
+    :populationStd 5.4 ;
+    :sampleSize 23994 .
+
+:ConscientiousnessTrait rdf:type :Conscientiousness ;
+    rdfs:label "Conscientiousness" ;
+    :hasNorm :ConscientiousnessNorm ;
+    :predictsOutcome :JobPerformanceOutcome ;
+    :predictsOutcome :AcademicPerformanceOutcome ;
+    :predictsOutcome :LeadershipEffectivenessOutcome .
+
+:ConscientiousnessNorm rdf:type :PopulationNorm ;
+    :populationMean 32.3 ;
+    :populationStd 5.8 ;
+    :sampleSize 23994 .
+
+ :NeuroticismTrait rdf:type :Neuroticism ;
+    rdfs:label "Neuroticism" ;
+ :hasNorm :NeuroticismNorm ;
+     :predictsOutcome :JobPerformanceOutcome .
+
+ :NeuroticismNorm rdf:type :PopulationNorm ;
+    :populationMean 30.6 ;
+    :populationStd 7.1 ;
+    :sampleSize 23994 .
+
+:OpennessTrait rdf:type :Openness ;
+    rdfs:label "Openness to Experience" ;
+    :hasNorm :OpennessNorm ;
+ :predictsOutcome :AcademicPerformanceOutcome ;
+    :predictsOutcome :LeadershipEffectivenessOutcome .
+
+:OpennessNorm rdf:type :PopulationNorm ;
+ :populationMean 38.7 ;
+    :populationStd 5.9 ;
+    :sampleSize 23994 .
+
+# ===============================================
+# INDIVIDUALS - PERFORMANCE OUTCOMES
+# ===============================================
+
+:JobPerformanceOutcome rdf:type :JobPerformance ;
+    rdfs:label "Job Performance" . 
+
+:AcademicPerformanceOutcome rdf:type :AcademicPerformance ;
+    rdfs:label "Academic Performance" .
+
+:LeadershipEffectivenessOutcome rdf:type :LeadershipEffectiveness ;
+    rdfs:label "Leadership Effectiveness" .
+
+# ===============================================
+# INDIVIDUALS - CORRELATION FINDINGS
+# ===============================================
+
+# Conscientiousness → Job Performance
+:C_JobPerf_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :ConscientiousnessTrait ;
+    :forOutcome :JobPerformanceOutcome ;
+    :correlationValue 0.27 ;
+    :confidenceIntervalLower 0.22 ;
+    :confidenceIntervalUpper 0.32 ;
+    :numberOfStudies 239 .
+
+# Extraversion → Job Performance
+:E_JobPerf_Correlation rdf:type :CorrelationFinding ;
+ :regardingTrait :ExtraversionTrait ;
+ :forOutcome :JobPerformanceOutcome ;
+    :correlationValue 0.13 ;
+    :confidenceIntervalLower 0.08 ;
+    :confidenceIntervalUpper 0.18 ;
+    :numberOfStudies 182 .
+
+# Neuroticism → Job Performance (Negative)
+:N_JobPerf_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :NeuroticismTrait ;
+    :forOutcome :JobPerformanceOutcome ;
+    :correlationValue -0.13 ;
+    :confidenceIntervalLower -0.18 ;
+ :confidenceIntervalUpper -0.08 ;
+    :numberOfStudies 165 .
+
+# Agreeableness → Job Performance
+ :A_JobPerf_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :AgreeablenessTrait ;
+    :forOutcome :JobPerformanceOutcome ;
+    :correlationValue 0.10 ;
+    :confidenceIntervalLower 0.05 ;
+    :confidenceIntervalUpper 0.15 ;
+    :numberOfStudies 142 .
+
+# Openness → Job Performance
+:O_JobPerf_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :OpennessTrait ;
+    :forOutcome :JobPerformanceOutcome ;
+    :correlationValue 0.07 ;
+    :confidenceIntervalLower 0.02 ;
+    :confidenceIntervalUpper 0.12 ;
+    :numberOfStudies 128 .
+
+# Conscientiousness → Academic Performance
+:C_Academic_Correlation rdf:type :CorrelationFinding ;
+ :regardingTrait :ConscientiousnessTrait ;
+ :forOutcome :AcademicPerformanceOutcome ;
+    :correlationValue 0.25 ;
+    :confidenceIntervalLower 0.21 ;
+    :confidenceIntervalUpper 0.29 ;
+    :numberOfStudies 138 . 
+
+# Openness → Academic Performance
+:O_Academic_Correlation rdf:type :CorrelationFinding ;
+ :regardingTrait :OpennessTrait ;
+    :forOutcome :AcademicPerformanceOutcome ;
+ :correlationValue 0.15 ;
+    :confidenceIntervalLower 0.11 ;
+    :confidenceIntervalUpper 0.19 ;
+    :numberOfStudies 96 .
+
+# Extraversion → Leadership
+:E_Leadership_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :ExtraversionTrait ;
+    :forOutcome :LeadershipEffectivenessOutcome ;
+    :correlationValue 0.24 ;
+    :confidenceIntervalLower 0.19 ;
+    :confidenceIntervalUpper 0.29 ;
+    :numberOfStudies 73 . 
+
+# Conscientiousness → Leadership
+:C_Leadership_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :ConscientiousnessTrait ;
+    :forOutcome :LeadershipEffectivenessOutcome ;
+    :correlationValue 0.16 ;
+    :confidenceIntervalLower 0.11 ;
+    :confidenceIntervalUpper 0.21 ;
+    :numberOfStudies 65 .
+
+# Openness → Leadership
+:O_Leadership_Correlation rdf:type :CorrelationFinding ;
+    :regardingTrait :OpennessTrait ;
+    :forOutcome :LeadershipEffectivenessOutcome ;
+    :correlationValue 0.15 ;
+    :confidenceIntervalLower 0.10 ;
+    :confidenceIntervalUpper 0.20 ;
+    :numberOfStudies 52 .
+
+# ===============================================
+# INDIVIDUALS - IPIP-50 QUESTIONS
+# ===============================================
+
+# ----- EXTRAVERSION QUESTIONS -----
+# Positive Items:  1, 11, 21, 31, 41
+# Negative Items: 6, 16, 26, 36, 46
+:Q1 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 1 ;
+    :questionText "Am the life of the party." ;
+    :measuresTrait :ExtraversionTrait . 
+
+:Q11 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 11 ;
+    :questionText "Feel comfortable around people." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q21 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 21 ;
+    :questionText "Start conversations." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q31 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 31 ;
+    :questionText "Talk to a lot of different people at parties." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q41 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 41 ;
+ :questionText "Don't mind being the center of attention." ;
+    :measuresTrait :ExtraversionTrait . 
+
+ :Q6 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 6 ;
+    :questionText "Don't talk a lot." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q16 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 16 ;
+    :questionText "Keep in the background." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q26 rdf:type :NegativelyKeyedQuestion ;
+ :questionID 26 ;
+    :questionText "Have little to say." ;
+    :measuresTrait :ExtraversionTrait .
+
+:Q36 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 36 ;
+    :questionText "Don't like to draw attention to myself." ;
+    :measuresTrait :ExtraversionTrait . 
+
+:Q46 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 46 ;
+    :questionText "Am quiet around strangers." ;
+    :measuresTrait :ExtraversionTrait .
+
+# ----- AGREEABLENESS QUESTIONS -----
+# Positive Items: 7, 17, 27, 37, 47
+# Negative Items: 2, 12, 22, 32, 42
+
+:Q7 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 7 ;
+    :questionText "Am interested in people." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q17 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 17 ;
+    :questionText "Sympathize with others' feelings." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q27 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 27 ;
+    :questionText "Have a soft heart." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q37 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 37 ;
+    :questionText "Take time out for others." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q47 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 47 ;
+    :questionText "Feel others' emotions." ;
+    :measuresTrait :AgreeablenessTrait .
+
+ :Q2 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 2 ;
+    :questionText "Feel little concern for others." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q12 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 12 ;
+    :questionText "Insult people." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q22 rdf:type :NegativelyKeyedQuestion ;
+ :questionID 22 ;
+    :questionText "Am not interested in other people's problems." ;
+    :measuresTrait :AgreeablenessTrait .
+
+:Q32 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 32 ;
+    :questionText "Am not really interested in others." ;
+    :measuresTrait :AgreeablenessTrait .
+
+ :Q42 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 42 ;
+    :questionText "Am hard to get to know." ;
+    :measuresTrait :AgreeablenessTrait . 
+
+# ----- CONSCIENTIOUSNESS QUESTIONS -----
+# Positive Items: 3, 13, 23, 33, 43
+# Negative Items: 8, 18, 28, 38, 48
+
+:Q3 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 3 ;
+    :questionText "Am always prepared." ;
+    :measuresTrait :ConscientiousnessTrait . 
+
+:Q13 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 13 ;
+    :questionText "Pay attention to details." ;
+    :measuresTrait :ConscientiousnessTrait . 
+
+:Q23 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 23 ;
+    :questionText "Get chores done right away." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q33 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 33 ;
+    :questionText "Like order." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q43 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 43 ;
+    :questionText "Follow a schedule." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q8 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 8 ;
+    :questionText "Leave my belongings around." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q18 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 18 ;
+    :questionText "Make a mess of things." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q28 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 28 ;
+    :questionText "Often forget to put things back in their proper place." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q38 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 38 ;
+    :questionText "Shirk my duties." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+:Q48 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 48 ;
+    :questionText "Don't see things through." ;
+    :measuresTrait :ConscientiousnessTrait .
+
+# ----- NEUROTICISM QUESTIONS -----
+# Positive Items: 4, 14, 24, 34, 44
+# Negative Items:  9, 19, 29, 39, 49
+
+ :Q4 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 4 ;
+    :questionText "Get stressed out easily." ;
+    :measuresTrait :NeuroticismTrait .
+
+ :Q14 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 14 ;
+    :questionText "Worry about things." ;
+    :measuresTrait :NeuroticismTrait .
+
+:Q24 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 24 ;
+    :questionText "Am easily disturbed." ;
+    :measuresTrait :NeuroticismTrait .
+
+:Q34 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 34 ;
+    :questionText "Get upset easily." ;
+    :measuresTrait :NeuroticismTrait .
+
+ :Q44 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 44 ;
+    :questionText "Change my mood a lot." ;
+    :measuresTrait :NeuroticismTrait .
+
+:Q9 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 9 ;
+    :questionText "Am relaxed most of the time." ;
+    :measuresTrait :NeuroticismTrait . 
+
+:Q19 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 19 ;
+    :questionText "Seldom feel blue." ;
+    :measuresTrait :NeuroticismTrait . 
+
+:Q29 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 29 ;
+    :questionText "Am not easily bothered by things." ;
+    :measuresTrait :NeuroticismTrait . 
+
+:Q39 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 39 ;
+    :questionText "Rarely get irritated." ;
+    :measuresTrait :NeuroticismTrait .
+
+:Q49 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 49 ;
+    :questionText "Keep my emotions under control." ;
+    :measuresTrait :NeuroticismTrait .
+
+# ----- OPENNESS QUESTIONS -----
+# Positive Items: 5, 15, 25, 35, 45
+# Negative Items: 10, 20, 30, 40, 50
+
+:Q5 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 5 ;
+    :questionText "Have a rich vocabulary." ;
+    :measuresTrait :OpennessTrait .
+
+:Q15 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 15 ;
+    :questionText "Have a vivid imagination." ;
+    :measuresTrait :OpennessTrait .
+
+:Q25 rdf:type :PositivelyKeyedQuestion ;
+ :questionID 25 ;
+    :questionText "Have excellent ideas." ;
+    :measuresTrait :OpennessTrait .
+
+:Q35 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 35 ;
+ :questionText "Am quick to understand things." ;
+    :measuresTrait :OpennessTrait .
+
+:Q45 rdf:type :PositivelyKeyedQuestion ;
+    :questionID 45 ;
+    :questionText "Use difficult words." ;
+    :measuresTrait :OpennessTrait .
+
+:Q10 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 10 ;
+    :questionText "Have difficulty understanding abstract ideas." ;
+    :measuresTrait :OpennessTrait .
+
+:Q20 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 20 ;
+ :questionText "Am not interested in abstract ideas." ;
+    :measuresTrait :OpennessTrait .
+
+ :Q30 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 30 ;
+    :questionText "Do not have a good imagination." ;
+    :measuresTrait :OpennessTrait .
+
+:Q40 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 40 ;
+    :questionText "Am not interested in theoretical discussions." ;
+    :measuresTrait :OpennessTrait .
+
+:Q50 rdf:type :NegativelyKeyedQuestion ;
+    :questionID 50 ;
+    :questionText "Have difficulty imagining things." ;
+    :measuresTrait :OpennessTrait . 

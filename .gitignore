@@ -1,0 +1,42 @@
+# Node
+node_modules/
+dist/
+build/
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database & Generated
+*.sqlite3
+chroma_db/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.gemini/
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log

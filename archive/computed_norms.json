@@ -1,0 +1,22 @@
+{
+  "extraversion": {
+    "mean": 29.6,
+    "std": 9.1
+  },
+  "agreeableness": {
+    "mean": 36.0,
+    "std": 5.9
+  },
+  "conscientiousness": {
+    "mean": 32.3,
+    "std": 6.6
+  },
+  "neuroticism": {
+    "mean": 30.6,
+    "std": 8.6
+  },
+  "openness": {
+    "mean": 38.7,
+    "std": 6.4
+  }
+}

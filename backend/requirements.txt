@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+pydantic
+owlready2
+scipy
+motor
+pymongo
+python-dotenv
+reportlab
+
+# RAG Pipeline & LLM Dependencies
+langchain
+langchain-google-genai
+langchain-community
+chromadb
+google-generativeai
+langchain_groq

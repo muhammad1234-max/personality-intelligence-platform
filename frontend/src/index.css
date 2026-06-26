@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@import "@fontsource/fustat/400.css";
+@import "@fontsource/fustat/600.css";
+@import "@fontsource/fustat/800.css";
+@import "@fontsource/schibsted-grotesk/400.css";
+@import "@fontsource/schibsted-grotesk/600.css";
+@import "@fontsource/schibsted-grotesk/700.css";
+
+
+@theme {
+  --font-sans: 'Schibsted Grotesk', system-ui, sans-serif;
+  --font-heading: 'Fustat', system-ui, sans-serif;
+  --font-dashboard: 'Schibsted Grotesk', system-ui, sans-serif;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1; /* Deep Indigo Main */
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
+
+  --color-accent-500: #8b5cf6; /* Subtle Purple */
+  --color-accent-600: #7c3aed;
+
+  --color-success-500: #10b981; /* Soft Green */
+  --color-success-600: #059669;
+
+  --color-blue-pro: #0ea5e9; /* Professional Blue */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    /* Tinted neutrals towards Indigo (hue 266) */
+    --background: oklch(98% 0.005 266);
+    --foreground: oklch(20% 0.02 266);
+    --card: oklch(99.5% 0.002 266);
+    --card-foreground: oklch(20% 0.02 266);
+    --border: oklch(92% 0.01 266);
+    --muted: oklch(95% 0.008 266);
+  }
+
+  .dark {
+    color-scheme: dark;
+    /* Tinted dark surfaces, using lightness for depth */
+    --background: oklch(10% 0.02 266);
+    --foreground: oklch(98% 0.005 266);
+    --card: oklch(14% 0.02 266);
+    --card-foreground: oklch(98% 0.005 266);
+    --border: oklch(20% 0.02 266);
+    --muted: oklch(18% 0.02 266);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Bottom padding handled in main app containers to prevent scrollbar issues */
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+.dashboard-text {
+  font-family: var(--font-dashboard);
+}
+
+/* Base interactive utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@layer utilities {
+  .ease-out-quart { transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1); }
+  .ease-out-quint { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+  .ease-out-expo { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+}
