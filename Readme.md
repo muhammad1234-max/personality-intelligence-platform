@@ -169,6 +169,11 @@ Core endpoints:
 4. Push to the branch (`git push origin feature/AmazingFeature`).
 5. Open a Pull Request.
 
+## Developers
+- **Muhammad Abbas** - [LinkedIn](https://www.linkedin.com/in/muhammad-abbas-6a9374295)
+- **Abdul Rahman Azam** - [LinkedIn](https://www.linkedin.com/in/abdulrahmanazam/)
+- **Hamza Shiekh** - [LinkedIn](https://www.linkedin.com/in/hamza-sheikh-1aa27a2a8/)
+
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
