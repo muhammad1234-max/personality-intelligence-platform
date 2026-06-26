@@ -19,10 +19,8 @@ from ..db.mongodb import (
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 security = HTTPBasic()
 
-# Admin password hash (SHA-256 of "Traits2026")
-# This is a hash, not the plain password - secure for server-side verification
-ADMIN_PASSWORD_HASH = hashlib.sha256("Traits2026".encode()).hexdigest()
-
+# Admin password hash from environment (SHA-256)
+ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH")
 def verify_admin_password(x_admin_token: Optional[str] = Header(None)) -> bool:
     """Verify admin authentication via header token."""
     if not x_admin_token:

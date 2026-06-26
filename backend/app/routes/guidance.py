@@ -1,8 +1,8 @@
 """
 Guidance Routes - API endpoints for personalized guidance generation
 """
-from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 from typing import Dict, Any
 import json
@@ -14,6 +14,7 @@ from ..services.llm_service import get_llm_service
 from ..services.rag_service import get_rag_service
 from ..services.ontology_service import ontology_service
 from ..db.mongodb import assessments_collection
+from .admin import verify_admin_password
 
 router = APIRouter(prefix="/api/guidance", tags=["Guidance"])
 
@@ -157,7 +158,8 @@ async def get_lifestyle_questions():
         llm_service = get_llm_service()
         return {"questions": llm_service.get_lifestyle_questions()}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error fetching lifestyle questions: {e}")
+        raise HTTPException(status_code=500, detail="Failed to fetch lifestyle questions")
 
 
 @router.post("/generate")
@@ -210,7 +212,7 @@ async def generate_guidance(request: GuidanceRequest):
         raise
     except Exception as e:
         print(f"Guidance generation error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to generate guidance: {str(e)}")
+        raise HTTPException(status_code=500, detail="An internal error occurred while generating guidance")
 
 
 @router.post("/generate/stream")
@@ -273,7 +275,7 @@ async def generate_guidance_stream(request: GuidanceRequest):
         raise
     except Exception as e:
         print(f"Guidance stream error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to generate guidance: {str(e)}")
+        raise HTTPException(status_code=500, detail="An internal error occurred while generating guidance")
 
 
 @router.get("/saved/{assessment_id}")
@@ -296,15 +298,17 @@ async def get_saved_guidance(assessment_id: str):
     except HTTPException:
         raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error getting saved guidance: {e}")
+        raise HTTPException(status_code=500, detail="An internal error occurred while retrieving saved guidance")
 
 
 @router.post("/initialize-rag")
-async def initialize_rag(force_rebuild: bool = False):
+async def initialize_rag(force_rebuild: bool = False, _: bool = Depends(verify_admin_password)):
     """Initialize or rebuild the RAG vector store."""
     try:
         rag_service = get_rag_service()
         rag_service.initialize_vector_store(force_rebuild=force_rebuild)
         return {"status": "success", "message": "RAG vector store initialized"}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error initializing RAG: {e}")
+        raise HTTPException(status_code=500, detail="An internal error occurred while initializing RAG")

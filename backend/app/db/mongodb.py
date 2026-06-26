@@ -8,11 +8,11 @@ from bson import ObjectId
 import os
 
 
-# MongoDB connection string (overridden by MONGODB_URI env var)
-MONGODB_URI = os.getenv(
-    "MONGODB_URI",
-    "mongodb+srv://k230061_db_user:RSM2K62jjlHUOUC5@personalitydata.g4n8qni.mongodb.net/?appName=personalityData"
-)
+# MongoDB connection string (must be provided via MONGODB_URI env var)
+MONGODB_URI = os.getenv("MONGODB_URI")
+if not MONGODB_URI:
+    # Do not hardcode the URI. It should be securely provided in the environment.
+    print("Warning: MONGODB_URI environment variable not set. Database connection will fail.")
 
 client = AsyncIOMotorClient(MONGODB_URI, server_api=ServerApi('1'))
 db = client["personality_assessment"]

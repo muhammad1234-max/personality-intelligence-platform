@@ -1,7 +1,7 @@
 // API service for Big Five Personality Assessment
 
 // Configure API URL based on environment
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://139.59.64.246:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 // Enable for debugging (set to false in production)
 const DEBUG = import.meta.env.DEV;
