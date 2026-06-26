@@ -4,7 +4,7 @@
 #
 
 app = 'personality-intelligence-platform'
-primary_region = 'bom'
+primary_region = 'ord'
 
 [build]
   dockerfile = 'Dockerfile'
