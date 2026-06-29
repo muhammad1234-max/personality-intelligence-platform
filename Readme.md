@@ -59,20 +59,24 @@
 
 ## 🚀 Live Demo
 
-- **Live Application:** [https://personality-intelligence-platform.vercel.app](https://personality-intelligence-platform.vercel.app) *(Update with your Vercel URL)*
-- **API Documentation:** [https://personality-intelligence-platform.fly.dev/docs](https://personality-intelligence-platform.fly.dev/docs) *(Update with your Fly.io URL)*
+- **Live Application:** [https://personality-intelligence-platform.vercel.app](https://personality-intelligence-platform.vercel.app) 
+- **API Documentation:** [https://personality-intelligence-platform.fly.dev/docs](https://personality-intelligence-platform.fly.dev/docs) 
 
 ---
 
 ## 📸 Screenshots
 
-| Landing Page | Assessment Flow |
+| Landing Page | Assessment Question |
 |:---:|:---:|
-| ![Landing Page](https://via.placeholder.com/600x400.png?text=Landing+Page+Screenshot) | ![Assessment](https://via.placeholder.com/600x400.png?text=Assessment+Flow+Screenshot) |
+| ![Landing Page](./assets/screenshots/landing-page.png) | ![Assessment Question](./assets/screenshots/assessment-question.png) |
 
-| Analytics Dashboard | AI Guidance |
+| Profile Results | Predicted Outcomes |
 |:---:|:---:|
-| ![Dashboard](https://via.placeholder.com/600x400.png?text=Results+Dashboard+Screenshot) | ![AI Guidance](https://via.placeholder.com/600x400.png?text=AI+Guidance+Chat+Screenshot) |
+| ![Profile Results](./assets/screenshots/profile-results.png) | ![Predicted Outcomes](./assets/screenshots/predicted-outcomes.png) |
+
+| Participant Details |
+|:---:|
+| ![Participant Details](./assets/screenshots/participant-details.png) |
 
 ---
 
