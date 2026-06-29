@@ -17,9 +17,6 @@ async def get_questions(short: bool = False):
     Returns both questions and likertOptions in a single response
     to minimize API calls from the frontend.
     """
-    if not ontology_service.is_loaded:
-        raise HTTPException(status_code=500, detail="Ontology not loaded")
-    
     questions_data, likert_data = ontology_service.get_questions(short=short)
     
     questions = [
@@ -37,7 +34,4 @@ async def get_questions(short: bool = False):
 @router.get("/traits")
 async def get_traits():
     """Get Big Five trait information for display."""
-    if not ontology_service.is_loaded:
-        raise HTTPException(status_code=500, detail="Ontology not loaded")
-    
     return {"traits": ontology_service.get_trait_info()}

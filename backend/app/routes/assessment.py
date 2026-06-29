@@ -15,9 +15,6 @@ REQUIRED_QUESTIONS = 50
 @router.post("/submit", response_model=AssessmentResult)
 async def submit_assessment(request: AssessmentRequest):
     """Process assessment and return scored results."""
-    if not ontology_service.is_loaded:
-        raise HTTPException(status_code=500, detail="Ontology not loaded")
-    
     # Validate that at least the short form (20 questions) is answered
     if len(request.responses) < 20:
         raise HTTPException(
