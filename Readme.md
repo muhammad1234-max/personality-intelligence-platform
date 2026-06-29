@@ -369,8 +369,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## 📞 Contact
 
-**Your Name** - [LinkedIn](https://linkedin.com/in/yourprofile) - [GitHub](https://github.com/your-username) - email@example.com
-
-Project Link: [https://github.com/your-username/personality-intelligence-platform](https://github.com/your-username/personality-intelligence-platform)
